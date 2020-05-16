@@ -3,14 +3,19 @@ local filesystem = require('gears.filesystem')
 local config_dir = filesystem.get_configuration_dir()
 local bin_dir = config_dir .. 'binaries/'
 
-return {
+local default_config =  {
 
 	-- The default applications that we will use in keybindings and widgets
 	default = {
 		terminal 										= 'kitty',																-- Terminal Emulator
 		text_editor 									= 'subl3',                      	            						-- GUI Text Editor
 		web_browser 									= 'firefox',                        	        						-- Web browser
-		file_manager 									= 'dolphin',                            	  	 	 					-- GUI File manager
+		file_manager 									= 'dolphin', 
+		multimedia										= 'vlc',
+		graphics										= 'gimp-2.10',
+		sandbox											= 'virtualbox',
+		games											= 'supertuxkart',
+		development										= '',                           	  	 	 					-- GUI File manager
 		network_manager 								= 'nm-connection-editor',												-- Network manager
 		bluetooth_manager 								= 'blueman-manager',													-- Bluetooth manager
 		power_manager 									= 'xfce4-power-manager',												-- Power manager
@@ -65,3 +70,13 @@ return {
 		update_profile  = bin_dir .. 'profile-image'																			-- Update profile picture
 	}
 }
+
+if filesystem.file_readable(filesystem.get_configuration_dir() .. 'configuration/apps-mine.lua') then
+	local mine = require("configuration.apps-mine")
+	local gears = require('gears')
+	gears.table.crush(default_config.default, mine.default or {})
+	gears.table.crush(default_config.run_on_start_up, mine.run_on_start_up or {})
+	gears.table.crush(default_config.bins, mine.bins or {})
+end  
+
+return default_config

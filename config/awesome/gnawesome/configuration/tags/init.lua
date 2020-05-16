@@ -3,60 +3,61 @@ local gears = require('gears')
 local beautiful = require('beautiful')
 
 local icons = require('theme.icons')
+local apps = require('configuration.apps')
 
 local tags = {
 	{
 		icon = icons.terminal,
 		type = 'terminal',
-		default_app = 'kitty',
+		default_app = apps.default.terminal,
 		screen = 1
 	},
 	{
 		icon = icons.web_browser,
 		type = 'chrome',
-		default_app = 'firefox',
+		default_app = apps.default.web_browser,
 		screen = 1
 	},
 	{
 		icon = icons.text_editor,
 		type = 'code',
-		default_app = 'subl3',
+		default_app = apps.default.text_editor,
 		screen = 1
 	},
 	{
 		icon = icons.file_manager,
 		type = 'files',
-		default_app = 'nemo',
+		default_app = apps.default.file_manager,
 		screen = 1
 	},
 	{
 		icon = icons.multimedia,
 		type = 'music',
-		default_app = 'vlc',
+		default_app = apps.default.multimedia,
 		screen = 1
 	},
 	{
 		icon = icons.games,
 		type = 'game',
-		default_app = 'supertuxkart',
+		default_app = apps.default.games,
 		screen = 1
 	},
 	{
 		icon = icons.graphics,
 		type = 'art',
-		default_app = 'gimp-2.10',
+		default_app = apps.default.graphics,
 		screen = 1
 	},
 	{
 		icon = icons.sandbox,
 		type = 'virtualbox',
-		default_app = 'virtualbox',
+		default_app = apps.default.sandbox,
 		screen = 1
 	},
 	{
 		icon = icons.development,
 		type = 'any',
-		default_app = '',
+		default_app = apps.default.development,
 		screen = 1
 	}
 	-- {
