@@ -124,7 +124,7 @@ ruled.client.connect_signal(
 				instance = { "QuakeTerminal" }
 			},
 			properties = {
-				tag = '1',
+				tag = "terminal",
 				switchtotag = true,
 				draw_backdrop = false,
 				size_hints_honor = false
@@ -144,7 +144,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = { 
-				tag = '2'
+				tag = "chrome"
 			}
 		}
 
@@ -156,7 +156,8 @@ ruled.client.connect_signal(
 					"Geany",
 					"Atom",
 					"Subl3",
-					"code-oss"
+					"code-oss",
+					"Code"
 				},
 				name  = {
 					"LibreOffice",
@@ -164,7 +165,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = { 
-				tag = '3'
+				tag = "code"
 			}
 		}
 
@@ -176,11 +177,12 @@ ruled.client.connect_signal(
 					"dolphin",
 					"ark",
 					"Nemo",
-					"File-roller"
+					"File-roller",
+					"caja"
 				}
 			},
 			properties = { 
-				tag = '4',
+				tag = "files",
 				switchtotag = true
 			}
 		}
@@ -195,7 +197,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = { 
-				tag = '5',
+				tag = "music",
 				switchtotag = true,
 				draw_backdrop = false
 			}
@@ -215,7 +217,7 @@ ruled.client.connect_signal(
 			name = { "Steam" }
 			},
 			properties = { 
-				tag = '6',
+				tag = "game",
 				skip_decoration = true,
 				draw_backdrop = false,
 				switchtotag = true,
@@ -236,7 +238,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = { 
-				tag = '7'
+				tag = "art"
 			}
 		}
 
@@ -250,7 +252,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = { 
-				tag = '8'
+				tag = "virtualbox"
 			}
 		}
 
@@ -266,7 +268,7 @@ ruled.client.connect_signal(
 				}
 			},
 			properties = { 
-				tag = '9',
+				tag = "any",
 				skip_decoration = true
 			}
 		}
@@ -377,7 +379,7 @@ client.connect_signal(
 				end
 			else
 				-- Move the Spotify instance to "5" tag on this screen
-				local t = awful.tag.find_by_name(awful.screen.focused(), "5")
+				local t = awful.tag.find_by_name(awful.screen.focused(), "music")
 				c:move_to_tag(t)
 			end
 		elseif c.class == "SuperTuxKart" then
@@ -403,7 +405,7 @@ client.connect_signal(
 				end
 			else
 				-- Move the instance to specified tag tag on this screen
-				local t = awful.tag.find_by_name(awful.screen.focused(), "6")
+				local t = awful.tag.find_by_name(awful.screen.focused(), "game")
 				c:move_to_tag(t)
 				t:view_only()
 				-- Enable fullscreeen again

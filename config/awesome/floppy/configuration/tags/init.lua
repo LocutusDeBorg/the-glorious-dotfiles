@@ -81,7 +81,7 @@ end)
 screen.connect_signal("request::desktop_decoration", function(s)
 	for i, tag in pairs(tags) do
 		awful.tag.add(
-			i,
+			tag.type,
 			{
 				icon = tag.icon,
 				icon_only = true,
