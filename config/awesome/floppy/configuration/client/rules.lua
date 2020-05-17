@@ -118,6 +118,8 @@ ruled.client.connect_signal(
 					"UXTerm",
 					"kitty",
 					"K3rmit"
+					"st",
+					"Alacritty"
 				}
 			},
 			except_any = {
@@ -178,7 +180,7 @@ ruled.client.connect_signal(
 					"ark",
 					"Nemo",
 					"File-roller",
-					"caja"
+					"Caja"
 				}
 			},
 			properties = { 
