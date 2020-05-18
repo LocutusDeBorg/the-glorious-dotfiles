@@ -117,7 +117,7 @@ ruled.client.connect_signal(
 					"XTerm",
 					"UXTerm",
 					"kitty",
-					"K3rmit"
+					"K3rmit",
 					"st",
 					"Alacritty"
 				}
