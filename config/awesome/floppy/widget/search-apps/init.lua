@@ -17,6 +17,15 @@ local clickable_container = require('widget.clickable-container')
 local config_dir = filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. '/widget/search-apps/icons/'
 
+
+function spawn_or_call(arg)
+	if type(arg)=='function' then
+		arg()
+	elseif type(arg)=='string' and string.len(arg)>0 then
+		awful.spawn(arg, false)
+	end
+end
+
 local return_button = function()
 
 	local widget = wibox.widget {
@@ -56,6 +65,24 @@ local return_button = function()
 		            end
 					awful.spawn(apps.default.rofiappmenu, false)
 				end
+			),
+			awful.button(
+				{},
+				2,
+				nil,
+				function()spawn_or_call(apps.default.searchbuttonrclick) end
+			),
+			awful.button(
+				{},
+				4,
+				nil,
+				function() spawn_or_call(apps.default.searchbuttonup) end
+			),
+			awful.button(
+				{},
+				5,
+				nil,
+				function() spawn_or_call(apps.default.searchbuttondown) end
 			)
 		)
 	)

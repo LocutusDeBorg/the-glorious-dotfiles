@@ -32,7 +32,13 @@ local default_config =  {
 
 		rofiappmenu 									= 'rofi -dpi ' .. screen.primary.dpi ..
 															' -show drun -theme ' .. config_dir ..
-															'/configuration/rofi/appmenu/rofi.rasi'					  			-- Application Menu
+															'/configuration/rofi/appmenu/rofi.rasi',				  			-- Application Menu
+		-- Search button mouse events can be either a string (for spawn)
+		-- or a no argument Lua function 
+		-- See the apps-mine.lua.example for a more functional example
+		searchbuttonup									= 'amixer -D pulse sset Master 5%+',
+		searchbuttondown								= 'amixer -D pulse sset Master 5%-',
+		searchbuttonrclick								= ''
 
 		-- You can add more default applications here
 	},
@@ -71,11 +77,11 @@ local default_config =  {
 	}
 }
 
-if filesystem.file_readable(filesystem.get_configuration_dir() .. 'configuration/apps-mine.lua') then
+if filesystem.file_readable(config_dir .. 'configuration/apps-mine.lua') then
 	local mine = require("configuration.apps-mine")
 	local gears = require('gears')
 	gears.table.crush(default_config.default, mine.default or {})
-	gears.table.crush(default_config.run_on_start_up, mine.run_on_start_up or {})
+	if mine.run_on_start_up then default_config.run_on_start_up = mine.run_on_start_up end
 	gears.table.crush(default_config.bins, mine.bins or {})
 end  
 
