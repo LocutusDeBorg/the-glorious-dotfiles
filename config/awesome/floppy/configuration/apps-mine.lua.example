@@ -1,0 +1,44 @@
+local awful = require('awful')
+local filesystem = require('gears.filesystem')
+local config_dir = filesystem.get_configuration_dir()
+
+return {
+    -- These just override the factory default values
+    default = {
+        terminal 										= 'st',																-- Terminal Emulator
+        text_editor 									= 'code',                      	            						-- GUI Text Editor
+        web_browser 									= 'google-chrome',                        	        				-- Web browser
+        file_manager 									= 'caja', 
+
+        -- Search button mouse events can be either a string (for spawn)
+        -- or a no argument Lua function
+        searchbuttonup									= function()
+                                                            awful.spawn('amixer -D pulse sset Master 5%+', false)
+                                                            awesome.emit_signal('widget::volume')
+                                                            awesome.emit_signal('module::volume_osd:show', true)
+                                                          end,
+
+        searchbuttondown								= function()
+                                                            awful.spawn('amixer -D pulse sset Master 5%-', false)
+                                                            awesome.emit_signal('widget::volume')
+                                                            awesome.emit_signal('module::volume_osd:show', true)
+                                                          end,
+        searchbuttonrclick								= ''
+
+    }
+
+    -- This replaces all of the run on start up
+    run_on_start_up = {
+
+        'picom -b --experimental-backends --dbus --config ' .. 
+        config_dir .. '/configuration/picom.conf',   																			-- Compositor
+
+        'blueman-applet',                                           	      								                    -- Bluetooth tray icon
+        'xfce4-power-manager',                                              	                    					    	-- Power manager
+        '/usr/lib/polkit-kde-authentication-agent-1 &' .. 
+        ' eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg)', 	          									-- Credential manager
+
+        'nm-applet',                                                                    	            						-- NetworkManager Applet
+        'pulseeffects --gapplication-service',                                              	        						-- Sound Equalizer   
+    }
+}
