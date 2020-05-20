@@ -25,7 +25,7 @@ return {
                                                           end,
         searchbuttonrclick								= ''
 
-    }
+    },
 
     -- This replaces all of the run on start up
     run_on_start_up = {
