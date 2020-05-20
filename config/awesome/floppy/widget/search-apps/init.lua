@@ -68,7 +68,7 @@ local return_button = function()
 			),
 			awful.button(
 				{},
-				2,
+				3,
 				nil,
 				function()spawn_or_call(apps.default.searchbuttonrclick) end
 			),
