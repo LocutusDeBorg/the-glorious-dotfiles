@@ -16,6 +16,7 @@ local default_config =  {
 		sandbox											= 'virtualbox',
 		games											= 'supertuxkart',
 		development										= '',                           	  	 	 					-- GUI File manager
+		social											= 'discord',
 		network_manager 								= 'nm-connection-editor',												-- Network manager
 		bluetooth_manager 								= 'blueman-manager',													-- Bluetooth manager
 		power_manager 									= 'xfce4-power-manager',												-- Power manager
