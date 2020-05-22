@@ -5,6 +5,8 @@ local beautiful = require('beautiful')
 local icons = require('theme.icons')
 local apps = require('configuration.apps')
 
+local config_dir = gears.filesystem.get_configuration_dir()
+
 local tags = {
 	{
 		icon = icons.terminal,
@@ -59,15 +61,27 @@ local tags = {
 		type = 'any',
 		default_app = apps.default.development,
 		screen = 1
+	},
+	{
+	  icon = icons.social,
+	  type = 'social',
+	  default_app = apps.default.social, 
+	  screen = 1
 	}
-	-- {
-	--   icon = icons.social,
-	--   type = 'social',
-	--   default_app = 'discord',
-	--   screen = 1
-	-- }
 }
 
+if gears.filesystem.file_readable(config_dir .. 'configuration/tags/tags-mine.lua') then
+	sort_order = require('configuration.tags.tags-mine')
+	sorted_tags = {}
+	for _, _type in pairs(sort_order) do
+		item = gears.table.find_first_key(tags, function(i)
+					return tags[i].type==_type
+				end
+		)
+		if item then table.insert(sorted_tags, tags[item]) end
+	end
+	tags = sorted_tags
+end
 
 tag.connect_signal("request::default_layouts", function()
     awful.layout.append_default_layouts({

@@ -1,0 +1,13 @@
+-- Re-order, comment out wanted tags, then rename this file to tags-mine.lua
+return {
+    'chrome',
+    "terminal",
+    "code",
+    "files",
+    "social",
+    -- "music",
+    -- "game",
+    -- "art",
+    -- "virtualbox",
+    "any"
+}
