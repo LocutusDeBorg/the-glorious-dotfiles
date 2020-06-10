@@ -9,6 +9,8 @@ local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require('widget.clickable-container')
 local task_list = require('widget.task-list')
 
+local config = require('configuration.apps').top_panel_widgets
+
 
 
 local TopPanel = function(s, offset)
@@ -287,18 +289,20 @@ local TopPanel = function(s, offset)
 		horizontal = true,
 		screen = 'primary',
 		widget = wibox.widget.systray
-	}
-
+	}	
 
 	s.tray_toggler  = require('widget.tray-toggler')
-	s.updater 		= require('widget.package-updater')()
-	s.screen_rec 	= require('widget.screen-recorder')()
-	s.music       	= require('widget.music')()
-	s.bluetooth   	= require('widget.bluetooth')()
-	s.network       = require('widget.network')()
-	s.battery     	= require('widget.battery')()
-	s.r_dashboard 	= require('layout.right-panel.right-panel-opener')()
 
+	local tmp_widgets = {s.tray_toggler}
+	for _, widget in pairs(config) do
+		local parts = gears.string.split(widget, '.')
+		widget_name = parts[#parts]
+		s[widget_name] = require(widget)()
+		table.insert(tmp_widgets, s[widget_name])
+	end
+	
+	s.r_dashboard 	= require('layout.right-panel.right-panel-opener')()
+	local right_widgets = gears.table.join(tmp_widgets, {layout_box(s), s.r_dashboard})
 
 	panel : setup {
 		layout = wibox.layout.align.horizontal,
@@ -317,15 +321,8 @@ local TopPanel = function(s, offset)
 				margins = dpi(5),
 				widget = wibox.container.margin
 			},
-			s.tray_toggler,
-			s.updater,
-			s.screen_rec,
-			s.music,
-			s.bluetooth,
-			s.network,
-			s.battery,
-			layout_box(s),
-			s.r_dashboard
+			
+			unpack(right_widgets)
 		}
 	}
 

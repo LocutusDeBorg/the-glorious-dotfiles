@@ -40,5 +40,13 @@ return {
 
         'nm-applet',                                                                    	            						-- NetworkManager Applet
         'pulseeffects --gapplication-service',                                              	        						-- Sound Equalizer   
-    }
+    },
+    top_panel_widgets = {
+		"widget.package-updater",
+		-- "widget.screen-recorder",	
+		-- "widget.music",
+		-- "widget.bluetooth",
+		"widget.network",
+		"widget.battery"
+	}
 }

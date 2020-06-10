@@ -75,6 +75,16 @@ local default_config =  {
 		full_screenshot = bin_dir .. 'snap full',              					                    							-- Full Screenshot
 		area_screenshot = bin_dir .. 'snap area',			                                        							-- Area Selected Screenshot
 		update_profile  = bin_dir .. 'profile-image'																			-- Update profile picture
+	},
+
+	-- Default list of top panel widgets (can be removed/reordered in apps-mine)
+	top_panel_widgets = {
+		"widget.package-updater",
+		"widget.screen-recorder",	
+		"widget.music",
+		"widget.bluetooth",
+		"widget.network",
+		"widget.battery"
 	}
 }
 
@@ -84,6 +94,7 @@ if filesystem.file_readable(config_dir .. 'configuration/apps-mine.lua') then
 	gears.table.crush(default_config.default, mine.default or {})
 	if mine.run_on_start_up then default_config.run_on_start_up = mine.run_on_start_up end
 	gears.table.crush(default_config.bins, mine.bins or {})
+	if mine.top_panel_widgets then default_config.top_panel_widgets = mine.top_panel_widgets end
 end  
 
 return default_config
