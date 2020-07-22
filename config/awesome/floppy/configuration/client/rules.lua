@@ -142,6 +142,7 @@ ruled.client.connect_signal(
 					"Tor Browser",
 					"discord",
 					"Chromium",
+					"vivaldi-stable",
 					"Google-chrome"
 				}
 			},
